@@ -38,7 +38,7 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'problem.apps.ProblemConfig',
-    'contest.apps.ContestConfig',
+    'set.apps.SetConfig',
 ]
 
 MIDDLEWARE = [

@@ -7,8 +7,9 @@ class Problem(models.Model):
     source = models.CharField(max_length=128, blank=True)  # 题目来源
     created_at = models.DateTimeField(auto_now_add=True)  # 创建时间
     updated_at = models.DateTimeField(auto_now=True)  # 修改时间
-    time_limit = models.IntegerField()  # 时间限制
-    memory_limit = models.IntegerField()  # 内存限制
+    time_limit = models.IntegerField(default=1000)  # 时间限制
+    memory_limit = models.IntegerField(default=32767)  # 内存限制
+    length_limit = models.IntegerField(default=1024*1024)  # 提交代码长度限制
 
     def __str__(self):
         return self.title

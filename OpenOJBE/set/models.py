@@ -31,6 +31,3 @@ class SetUser(models.Model):
     user = models.ForeignKey(User, on_delete=models.CASCADE)  # 对应的用户
     st = models.ForeignKey(Set, on_delete=models.CASCADE)  # 对应的 Set
     password = models.CharField(max_length=128, blank=True)  # 激活密码（如果不为空，则每次登陆需要重新验证）
-
-    def __str__(self):
-        return self.user.username + ': ' + self.st.title

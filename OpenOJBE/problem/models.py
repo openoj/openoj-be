@@ -9,7 +9,13 @@ class Problem(models.Model):
     updated_at = models.DateTimeField(auto_now=True)  # 修改时间
     time_limit = models.IntegerField(default=1000)  # 时间限制
     memory_limit = models.IntegerField(default=32767)  # 内存限制
-    length_limit = models.IntegerField(default=1024*1024)  # 提交代码长度限制
+    length_limit = models.IntegerField(default=1024 * 1024)  # 提交代码长度限制
 
     def __str__(self):
         return self.title
+
+    class Meta:
+        db_table = 'problem'
+        permissions = (
+            ("can_view_problem", "可以查看题目 / 可以将题目添加至 Set"),
+        )

@@ -16,6 +16,9 @@ class Set(models.Model):
     def __str__(self):
         return self.title
 
+    class Meta:
+        db_table = 'set'
+
 
 class SetProblem(models.Model):
     problem = models.ForeignKey(Problem, on_delete=models.CASCADE)  # 对应在题库中的题目
@@ -26,8 +29,15 @@ class SetProblem(models.Model):
     def __str__(self):
         return self.title
 
+    class Meta:
+        db_table = 'set_problem'
+
 
 class SetUser(models.Model):
     user = models.ForeignKey(User, on_delete=models.CASCADE)  # 对应的用户
     st = models.ForeignKey(Set, on_delete=models.CASCADE)  # 对应的 Set
-    password = models.CharField(max_length=128, blank=True)  # 激活密码（如果不为空，则每次登陆需要重新验证）
+    password = models.CharField(max_length=128, blank=True)  # 激活密码（如果不为空，则每次更换 IP 需要重新验证）
+    ip = models.CharField(max_length=128, blank=True)  # 激活 IP
+
+    class Meta:
+        db_table = 'set_user'

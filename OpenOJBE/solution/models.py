@@ -15,3 +15,6 @@ class Solution(models.Model):
     code = models.TextField(max_length=1024 * 1024)  # 提交代码
     ip = models.CharField(max_length=128)  # 提交 IP
     info = models.TextField(max_length=1024 * 1024)  # Info 信息
+
+    class Meta:
+        db_table = 'solution'

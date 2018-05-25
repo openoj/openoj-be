@@ -1,7 +1,5 @@
 from rest_framework import permissions
 
-from set.models import Set
-
 
 class SetPermission(permissions.BasePermission):
     """

@@ -18,10 +18,13 @@ from django.urls import path
 from django.conf.urls import url, include
 
 from problem import views as problem_views
+from set import views as set_views
 from rest_framework.routers import DefaultRouter
 
 router = DefaultRouter()
 router.register(r'problem', problem_views.ProblemViewSet)
+router.register(r'set', set_views.SetViewSet)
+router.register(r'set_problem', set_views.SetProblemViewSet)
 
 urlpatterns = [
     url(r'^', include(router.urls)),

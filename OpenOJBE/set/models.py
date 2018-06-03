@@ -10,8 +10,8 @@ class Set(models.Model):
     description = models.TextField(blank=True)  # Set 描述
     created_at = models.DateTimeField(auto_now_add=True)  # 创建时间
     updated_at = models.DateTimeField(auto_now=True)  # 更新时间
-    started_at = models.DateTimeField()  # 开始时间
-    ended_at = models.DateTimeField()  # 结束时间
+    started_at = models.DateTimeField(auto_now_add=True)  # 开始时间
+    ended_at = models.DateTimeField(auto_now_add=True)  # 结束时间
     password = models.CharField(max_length=128, blank=True)  # 密码（如果为空则为开放 Set ）
 
     def __str__(self):

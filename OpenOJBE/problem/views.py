@@ -6,6 +6,8 @@ from problem.models import Problem
 from problem.serializers import ProblemSerializer
 from problem.permissions import ProblemPermission
 
+from oauth2_provider.contrib.rest_framework import TokenHasScope
+
 
 class ProblemFilter(django_filters.FilterSet):
     class Meta:
@@ -21,4 +23,5 @@ class ProblemViewSet(viewsets.ModelViewSet):
     queryset = Problem.objects.all()
     serializer_class = ProblemSerializer
     filter_class = ProblemFilter
-    permission_classes = (ProblemPermission,)
+    required_scopes = ['read']
+    permission_classes = (ProblemPermission, TokenHasScope)

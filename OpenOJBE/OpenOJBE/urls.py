@@ -17,6 +17,7 @@ from django.contrib import admin
 from django.urls import path
 from django.conf.urls import url, include
 
+from account import views as account_views
 from problem import views as problem_views
 from set import views as set_views
 from rest_framework.routers import DefaultRouter
@@ -29,5 +30,8 @@ router.register(r'set_problem', set_views.SetProblemViewSet)
 urlpatterns = [
     url(r'^', include(router.urls)),
     url(r'^api-auth/', include('rest_framework.urls', namespace='rest_framework')),
+    url(r'^login/$', account_views.UserLoginAPI.as_view(), name='login'),
+    url(r'^logout/$', account_views.UserLogoutAPI.as_view(), name='logout'),
     path('admin/', admin.site.urls),
+    path('o/', include('oauth2_provider.urls', namespace='oauth2_provider')),
 ]

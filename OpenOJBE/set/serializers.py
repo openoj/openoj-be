@@ -1,6 +1,7 @@
 from rest_framework import serializers
 
 from set.models import Set, SetProblem
+from problem.serializers import ProblemSerializer
 
 
 class SetProblemSerializer(serializers.ModelSerializer):
@@ -15,19 +16,12 @@ class SetProblemSerializer(serializers.ModelSerializer):
 class SetProblemDetailSerializer(serializers.ModelSerializer):
     """ SetProblem Detail 序列化 """
 
-    content = serializers.CharField(source='problem.content')
-    source = serializers.CharField(source='problem.source')
-    created_at = serializers.CharField(source='problem.created_at')
-    updated_at = serializers.CharField(source='problem.updated_at')
-    time_limit = serializers.CharField(source='problem.time_limit')
-    memory_limit = serializers.CharField(source='problem.memory_limit')
-    length_limit = serializers.CharField(source='problem.length_limit')
+    problem = ProblemSerializer(read_only=True)
 
     # 在 Detail 中，显示题目详情
     class Meta:
         model = SetProblem
-        fields = ('url', 'id', 'index', 'title', 'problem', 'st', 'content', 'source', 'created_at', 'updated_at',
-                  'time_limit', 'memory_limit', 'length_limit')
+        fields = ('url', 'id', 'index', 'title', 'problem', 'st')
 
 
 class SetSerializer(serializers.ModelSerializer):

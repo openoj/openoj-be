@@ -6,6 +6,8 @@ from set.models import Set, SetProblem
 from set.serializers import SetSerializer, SetProblemSerializer, SetDetailSerializer, SetProblemDetailSerializer
 from set.permissions import SetPermission, SetProblemPermission
 
+from oauth2_provider.contrib.rest_framework import TokenHasScope
+
 
 class SetFilter(django_filters.FilterSet):
     class Meta:
@@ -20,7 +22,7 @@ class SetViewSet(viewsets.ModelViewSet):
     queryset = Set.objects.all()
     serializer_class = SetSerializer
     filter_class = SetFilter
-    permission_classes = (SetPermission,)
+    permission_classes = (SetPermission, TokenHasScope)
 
     def get_serializer_class(self):
         if self.detail:
@@ -40,7 +42,7 @@ class SetProblemViewSet(viewsets.ModelViewSet):
     queryset = SetProblem.objects.all()
     serializer_class = SetProblemSerializer
     filter_class = SetProblemFilter
-    permission_classes = (SetProblemPermission,)
+    permission_classes = (SetProblemPermission, TokenHasScope)
 
     def get_serializer_class(self):
         if self.detail:

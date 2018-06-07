@@ -1,3 +1,4 @@
+# coding=utf-8
 from rest_framework import permissions
 
 
@@ -17,8 +18,11 @@ class SetPermission(permissions.BasePermission):
 
     def has_object_permission(self, request, view, obj):
         # 只有拥有查看权限或者密码验证通过的用户可以查看
-        if request.method in permissions.SAFE_METHODS or obj.passed(request):
-            return request.user.has_perm('problem.can_view_set')
+        if request.method in permissions.SAFE_METHODS:
+            if obj.passed(request):
+                return True
+            else:
+                return request.user.has_perm('problem.can_view_set')
         # 拥有修改权限的用户才可以修改 Set
         if request.method == 'PUT':
             return request.user.has_perm('problem.can_change_set')
@@ -42,7 +46,10 @@ class SetProblemPermission(permissions.BasePermission):
     def has_object_permission(self, request, view, obj):
         # 只有拥有查看权限或者密码验证通过的用户可以查看
         if request.method in permissions.SAFE_METHODS:
-            return request.user.has_perm('problem.can_view_set')
+            if obj.st.passed(request):
+                return True
+            else:
+                return request.user.has_perm('problem.can_view_set')
         # 拥有修改权限的用户才可以修改 SetProblem
         if request.method == 'PUT':
             return request.user.has_perm('problem.can_change_set')

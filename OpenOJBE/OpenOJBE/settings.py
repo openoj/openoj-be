@@ -38,6 +38,7 @@ INSTALLED_APPS = [
     'oauth2_provider',
     'rest_framework',
     'django_filters',
+    'account.apps.AccountConfig',
     'problem.apps.ProblemConfig',
     'set.apps.SetConfig',
     'solution.apps.SolutionConfig',
@@ -137,8 +138,12 @@ REST_FRAMEWORK = {
         'rest_framework.renderers.JSONRenderer',
     ),
     'DEFAULT_AUTHENTICATION_CLASSES': (
-        # 'rest_framework.authentication.BasicAuthentication',
-        # 'rest_framework.authentication.SessionAuthentication',
+        'rest_framework.authentication.BasicAuthentication',
+        'rest_framework.authentication.SessionAuthentication',
         'oauth2_provider.contrib.rest_framework.OAuth2Authentication',
     )
 }
+
+MAIL_ACCESS_KEY = ''
+MAIL_ACCESS_SECRET = ''
+MAIL_ACCOUNT = ''

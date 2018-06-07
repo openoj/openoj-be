@@ -1,12 +1,9 @@
+import django_filters
 from rest_framework import viewsets
 
-import django_filters
-
 from problem.models import Problem
-from problem.serializers import ProblemSerializer
 from problem.permissions import ProblemPermission
-
-from oauth2_provider.contrib.rest_framework import TokenHasScope
+from problem.serializers import ProblemSerializer
 
 
 class ProblemFilter(django_filters.FilterSet):
@@ -24,4 +21,4 @@ class ProblemViewSet(viewsets.ModelViewSet):
     serializer_class = ProblemSerializer
     filter_class = ProblemFilter
     required_scopes = ['read']
-    permission_classes = (ProblemPermission, TokenHasScope)
+    permission_classes = (ProblemPermission,)

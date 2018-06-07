@@ -1,7 +1,7 @@
 from rest_framework import serializers
 
-from set.models import Set, SetProblem
 from problem.serializers import ProblemSerializer
+from set.models import Set, SetProblem
 
 
 class SetProblemSerializer(serializers.ModelSerializer):
@@ -33,7 +33,9 @@ class SetSerializer(serializers.ModelSerializer):
     # 列表中显示基本信息
     class Meta:
         model = Set
-        fields = ('url', 'id', 'title', 'created_at', 'updated_at', 'started_at', 'ended_at', 'password', 'user')
+        fields = (
+            'url', 'id', 'title', 'created_at', 'updated_at', 'started_at', 'ended_at', 'password', 'user', 'type'
+        )
 
 
 class SetDetailSerializer(serializers.ModelSerializer):
@@ -46,4 +48,4 @@ class SetDetailSerializer(serializers.ModelSerializer):
     class Meta:
         model = Set
         fields = ('url', 'id', 'title', 'description', 'created_at', 'updated_at', 'started_at', 'ended_at',
-                  'set_problem', 'user')
+                  'set_problem', 'user', 'type')

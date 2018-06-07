@@ -1,4 +1,5 @@
 from django.contrib import admin
+
 from set.models import Set, SetProblem, SetUser
 
 admin.site.register(Set)

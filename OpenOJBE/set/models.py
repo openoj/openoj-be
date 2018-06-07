@@ -1,18 +1,25 @@
-from django.db import models
 from django.contrib.auth.models import User
+from django.db import models
 
+from datetime import datetime
 from problem.models import Problem
 
 
 class Set(models.Model):
+    set_type = (
+        ('problems', '题库'),
+        ('acm_contest', 'ACM 比赛')
+    )
+
     user = models.ForeignKey(User, on_delete=models.CASCADE)  # 创建者
     title = models.CharField(max_length=128)  # Set 标题
     description = models.TextField(blank=True)  # Set 描述
     created_at = models.DateTimeField(auto_now_add=True)  # 创建时间
     updated_at = models.DateTimeField(auto_now=True)  # 更新时间
-    started_at = models.DateTimeField(auto_now_add=True)  # 开始时间
-    ended_at = models.DateTimeField(auto_now_add=True)  # 结束时间
-    password = models.CharField(max_length=128, blank=True)  # 密码（如果为空则为开放 Set ）
+    started_at = models.DateTimeField(default=datetime.now)  # 开始时间
+    ended_at = models.DateTimeField(default=datetime.now)  # 结束时间
+    password = models.CharField(max_length=128, blank=True, null=True)  # 密码（如果为空则为开放 Set ）
+    type = models.CharField(max_length=128, choices=set_type, default='problems')
 
     def __str__(self):
         return self.title
@@ -42,7 +49,7 @@ class Set(models.Model):
         if not set_user.password:
             return True
         # 如果有密码保护，则验证 IP 是否相同
-        if request.META.has_key('HTTP_X_FORWARDED_FOR'):
+        if 'HTTP_X_FORWARDED_FOR' in request.META:
             ip = request.META['HTTP_X_FORWARDED_FOR']
         else:
             ip = request.META['REMOTE_ADDR']
